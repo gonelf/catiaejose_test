@@ -56,7 +56,9 @@
     </div>
 
   </body>
-  <script type="text/javascript" src="./cookie.js"></script>
+  <!-- <script type="text/javascript" src="./cookie.js"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+
   <script type="text/javascript" src="./airtable.js"></script>
   <script type="text/javascript">
 
@@ -66,8 +68,12 @@
         // console.log(data.records.length);
         if (data.records.length > 0) {
           // console.log(data.records[0]);
-          setCookie("catiaejose.com-users", 0, -1);
-          setCookie("catiaejose.com-user", encodeURI(JSON.stringify(data.records[0])), 10);
+          // setCookie("catiaejose.com-users", 0, -1);
+          // setCookie("catiaejose.com-user", encodeURI(JSON.stringify(data.records[0])), 10);
+
+          Cookies.set('catiaejose.com-users');
+          Cookies.set('catiaejose.com-user', JSON.stringify(data.records[0]));
+
           // console.log(getCookie("catiaejose.com-user"));
           window.location.href = "./main.html";
         }

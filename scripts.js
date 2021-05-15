@@ -13,27 +13,32 @@ function fetch(user) {
   getUsersByGID(gid, function(data){
     // success
     users = data['records'];
-    setCookie("catiaejose.com-users", encodeURI(JSON.stringify(data['records'])), 10);
+    // setCookie("catiaejose.com-users", encodeURI(JSON.stringify(data['records'])), 10);
+    Cookies.set('catiaejose.com-users', JSON.stringify(data['records']));
+
     $("#modal-loading").hide();
     populateInfo(user, users);
   }, function(){
     //error
-    setCookie("catiaejose.com-user", 0, -1);
+    // setCookie("catiaejose.com-user", 0, -1);
+    Cookies.remove('catiaejose.com-user');
+
     window.location.href = "./index.html";
   });
 }
 
 function start(user) {
-  if(!getCookie("catiaejose.com-user")){
+  // if(!getCookie("catiaejose.com-user")){
+  if(!Cookies.get("catiaejose.com-user")){
     window.location.href = "./index.html";
   }
   else {
     var users = [];
 
-    if (getCookie("catiaejose.com-users")) {
+    if (Cookies.get("catiaejose.com-users")) {
       // console.log("cache");
       // console.log(getCookie("catiaejose.com-users"));
-      users = JSON.parse(getCookie("catiaejose.com-users"));
+      users = JSON.parse(Cookies.get("catiaejose.com-users"));
       populateInfo(user, users);
       return users;
     }
@@ -99,7 +104,7 @@ $("#close").click(function(){
 
 $("body").on("click", ".confirm", function(e){
   if (!users){
-    users = JSON.parse(getCookie("catiaejose.com-users"));
+    users = JSON.parse(Cookies.get("catiaejose.com-users"));
   }
   let type = $(e.target).attr("usertype");
   let userid = $(e.target).attr("userid");
@@ -173,7 +178,7 @@ $("#modal-loading").hide();
 $("#modal-overlay").hide();
 
 // console.log(getCookie("catiaejose.com-user"));
-let user = JSON.parse(getCookie("catiaejose.com-user"));
+let user = JSON.parse(Cookies.get("catiaejose.com-user"));
 // console.log(user);
 
 var users = start(user);
