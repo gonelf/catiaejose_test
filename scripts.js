@@ -138,9 +138,28 @@ $(".menu-items").click(function(e){
   $('html, body').animate({
       scrollTop: $(e.target.id).offset().top
   }, 500);
+  $(".sidebar").hide();
 });
 
 
+$(".mobile-menu").click(function(e){
+  $(".sidebar").show();
+});
+
+click = false;
+
+$("#modal-card").click(function(e){
+  // console.log("click - card");
+  click = true;
+  setTimeout(function(){ click = false; }, 500);
+})
+
+$("#modal-overlay").click(function(e){
+  // console.log("click - modal");
+  if (!click) {
+    $("#modal-overlay").hide();
+  }
+})
 
 // start
 
