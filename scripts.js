@@ -67,7 +67,7 @@ function hideForms() {
   $('#adulto').hide();
   $('#plusone').hide();
   $('#kid-known').hide();
-  $('#kid-unkown').hide();
+  $('#kid-unknown').hide();
 }
 
 function formSubmit(target) {
@@ -83,9 +83,11 @@ function formSubmit(target) {
     // console.log("success");
     fetch(user);
     $("#modal-overlay").hide();
+    click = false;
   }, function(){
     // console.log("error");
     $("#modal-overlay").hide();
+    click = false;
   })
 }
 
@@ -113,11 +115,13 @@ $("body").on("click", ".confirm", function(e){
   hideForms();
 
   $("#modal-overlay").show();
+  $("#modal-card").css({"margin-top":window.pageYOffset+"px"})
+  // console.log(window.pageYOffset);
   $("#"+type).show();
 
   // data
-  $(".modal-title").html(user.fields.name);
   let name = (user.fields.name) ? user.fields.name : "";
+  $(".modal-title").html(name);
   $("#"+type+" #name").val(name);
   let email = (user.fields.email) ? user.fields.email : "";
   $("#"+type+" #email").val(email);
@@ -149,7 +153,20 @@ $(".mobile-menu").click(function(e){
   $(".sidebar").show();
 });
 
+click = false;
 
+$("#modal-card").click(function(e){
+  // console.log("click - card");
+  click = true;
+  setTimeout(function(){ click = false; }, 500);
+})
+
+$("#modal-overlay").click(function(e){
+  // console.log("click - modal");
+  if (!click) {
+    $("#modal-overlay").hide();
+  }
+})
 // start
 
 $("#modal-loading").hide();
