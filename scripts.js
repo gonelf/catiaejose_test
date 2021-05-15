@@ -11,11 +11,12 @@ function fetch(user) {
     // success
     users = data['records'];
     setCookie("catiaejose.com-users", JSON.stringify(data['records']), 10);
+
     $("#modal-loading").hide();
     populateInfo(user, users);
   }, function(){
     //error
-    setCookie("catiaejose.com-user", 0, -1);
+    deleteCookie("catiaejose.com-user");
     window.location.href = "./index.html";
   });
 }
@@ -25,7 +26,7 @@ function start(user) {
     window.location.href = "./index.html";
   }
   else {
-    var users = [];
+    // var users = [];
 
     if (getCookie("catiaejose.com-users")) {
       // console.log("cache");
