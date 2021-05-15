@@ -63,7 +63,7 @@ function hideForms() {
   $('#adulto').hide();
   $('#plusone').hide();
   $('#kid-known').hide();
-  $('#kid-unkown').hide();
+  $('#kid-unknown').hide();
 }
 
 function formSubmit(target) {
